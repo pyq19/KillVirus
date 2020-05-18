@@ -93,19 +93,19 @@
         "__id__": 68
       },
       {
-        "__id__": 79
+        "__id__": 80
       },
       {
-        "__id__": 81
+        "__id__": 82
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 100
+        "__id__": 101
       },
       {
-        "__id__": 101
+        "__id__": 102
       }
     ],
     "_prefab": null,
@@ -3456,10 +3456,10 @@
         "__id__": 73
       },
       {
-        "__id__": 75
+        "__id__": 76
       },
       {
-        "__id__": 77
+        "__id__": 78
       }
     ],
     "_active": true,
@@ -3716,6 +3716,9 @@
     "_components": [
       {
         "__id__": 74
+      },
+      {
+        "__id__": 75
       }
     ],
     "_prefab": null,
@@ -3734,14 +3737,14 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -65,
         38.418,
         0,
         0,
@@ -3784,21 +3787,38 @@
     "_spriteFrame": {
       "__uuid__": "88564f88-d87d-4685-82da-4c6449ce10d1"
     },
-    "_type": 0,
+    "_type": 3,
     "_sizeMode": 0,
-    "_fillType": 0,
+    "_fillType": 2,
     "_fillCenter": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 0.5,
+      "y": 0.5
     },
-    "_fillStart": 0,
-    "_fillRange": 0,
+    "_fillStart": 0.25,
+    "_fillRange": -0.6,
     "_isTrimmedMode": true,
     "_atlas": {
       "__uuid__": "764b1a13-7acb-4335-9602-8bcd3958d3eb"
     },
     "_id": "1cobdOGrhHGJ/3odtfilGj"
+  },
+  {
+    "__type__": "cc.ProgressBar",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 73
+    },
+    "_enabled": true,
+    "_N$totalLength": 1,
+    "_N$barSprite": {
+      "__id__": 74
+    },
+    "_N$mode": 2,
+    "_N$progress": 0.6,
+    "_N$reverse": true,
+    "_id": "1eR2th4nNLXY0Q+IY4FfoO"
   },
   {
     "__type__": "cc.Node",
@@ -3811,7 +3831,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 76
+        "__id__": 77
       }
     ],
     "_prefab": null,
@@ -3867,7 +3887,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 75
+      "__id__": 76
     },
     "_enabled": true,
     "_materials": [
@@ -3905,7 +3925,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 78
+        "__id__": 79
       }
     ],
     "_prefab": null,
@@ -3961,7 +3981,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 77
+      "__id__": 78
     },
     "_enabled": true,
     "_materials": [
@@ -3999,7 +4019,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 80
+        "__id__": 81
       }
     ],
     "_prefab": null,
@@ -4055,7 +4075,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 79
+      "__id__": 80
     },
     "_enabled": true,
     "_materials": [
@@ -4093,13 +4113,13 @@
     },
     "_children": [
       {
-        "__id__": 82
+        "__id__": 83
       },
       {
-        "__id__": 88
+        "__id__": 89
       },
       {
-        "__id__": 94
+        "__id__": 95
       }
     ],
     "_active": true,
@@ -4157,20 +4177,20 @@
     "_name": "bB_1",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 81
+      "__id__": 82
     },
     "_children": [
       {
-        "__id__": 83
+        "__id__": 84
       },
       {
-        "__id__": 85
+        "__id__": 86
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 87
+        "__id__": 88
       }
     ],
     "_prefab": null,
@@ -4226,13 +4246,13 @@
     "_name": "icmain",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 82
+      "__id__": 83
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 84
+        "__id__": 85
       }
     ],
     "_prefab": null,
@@ -4288,7 +4308,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 83
+      "__id__": 84
     },
     "_enabled": true,
     "_materials": [
@@ -4322,13 +4342,13 @@
     "_name": "arrUp",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 82
+      "__id__": 83
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 86
+        "__id__": 87
       }
     ],
     "_prefab": null,
@@ -4384,7 +4404,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 85
+      "__id__": 86
     },
     "_enabled": true,
     "_materials": [
@@ -4418,7 +4438,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 82
+      "__id__": 83
     },
     "_enabled": true,
     "_materials": [
@@ -4452,20 +4472,20 @@
     "_name": "bor1",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 81
+      "__id__": 82
     },
     "_children": [
       {
-        "__id__": 89
+        "__id__": 90
       },
       {
-        "__id__": 91
+        "__id__": 92
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 93
+        "__id__": 94
       }
     ],
     "_prefab": null,
@@ -4521,13 +4541,13 @@
     "_name": "subWeapon1",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 88
+      "__id__": 89
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 90
+        "__id__": 91
       }
     ],
     "_prefab": null,
@@ -4583,7 +4603,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 89
+      "__id__": 90
     },
     "_enabled": true,
     "_materials": [
@@ -4617,13 +4637,13 @@
     "_name": "arrUp",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 88
+      "__id__": 89
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 92
+        "__id__": 93
       }
     ],
     "_prefab": null,
@@ -4679,7 +4699,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 91
+      "__id__": 92
     },
     "_enabled": true,
     "_materials": [
@@ -4713,7 +4733,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 88
+      "__id__": 89
     },
     "_enabled": true,
     "_materials": [
@@ -4747,20 +4767,20 @@
     "_name": "bR_1",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 81
+      "__id__": 82
     },
     "_children": [
       {
-        "__id__": 95
+        "__id__": 96
       },
       {
-        "__id__": 97
+        "__id__": 98
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 99
+        "__id__": 100
       }
     ],
     "_prefab": null,
@@ -4816,13 +4836,13 @@
     "_name": "coin",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 94
+      "__id__": 95
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 96
+        "__id__": 97
       }
     ],
     "_prefab": null,
@@ -4878,7 +4898,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 95
+      "__id__": 96
     },
     "_enabled": true,
     "_materials": [
@@ -4912,13 +4932,13 @@
     "_name": "arrUp",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 94
+      "__id__": 95
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 98
+        "__id__": 99
       }
     ],
     "_prefab": null,
@@ -4974,7 +4994,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 97
+      "__id__": 98
     },
     "_enabled": true,
     "_materials": [
@@ -5008,7 +5028,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 94
+      "__id__": 95
     },
     "_enabled": true,
     "_materials": [
