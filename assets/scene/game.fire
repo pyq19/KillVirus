@@ -2152,7 +2152,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "1 (21)",
+    "_name": "circle",
     "_objFlags": 0,
     "_parent": {
       "__id__": 40
@@ -2248,7 +2248,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "6 (17)",
+    "_name": "tail",
     "_objFlags": 0,
     "_parent": {
       "__id__": 40
@@ -2344,7 +2344,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "8 (17)",
+    "_name": "virus",
     "_objFlags": 0,
     "_parent": {
       "__id__": 40
@@ -2508,7 +2508,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "7 (16)",
+    "_name": "tail",
     "_objFlags": 0,
     "_parent": {
       "__id__": 47
@@ -2604,7 +2604,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "1 (21)",
+    "_name": "circle",
     "_objFlags": 0,
     "_parent": {
       "__id__": 47
@@ -2700,7 +2700,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "9 (2)",
+    "_name": "virus",
     "_objFlags": 0,
     "_parent": {
       "__id__": 47
