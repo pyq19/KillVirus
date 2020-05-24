@@ -73,7 +73,7 @@ export default class Logo extends cc.Component {
         //     .to(0.2, { position: cc.v2(x, y) })
         //     .call(this._random_move(node, center))
         //     .start();
-        cc.log(x, y);
+        // cc.log(x, y);
         let seq = cc.sequence(
             cc.moveTo(d, cc.v2(x, y)),
             cc.callFunc(() => {
