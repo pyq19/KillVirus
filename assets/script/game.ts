@@ -31,22 +31,13 @@ export default class Game extends cc.Component {
 
     // 关卡-1(向右滑动)
     previous_level() {
-        let t = cc.tween;
-        // 所有框框向右移动
-        t(this.level_design)
-            .to(0.3, {})
-            .call(() => {})
-            .start();
-        // 当前框变小
-        // 之前框变大
-        // 复原所有框
+        let script = this.level_design.getComponent("level_design");
+        script.previous_level();
     }
 
     // 关卡+1(向左滑动)
     next_level() {
-        // 所有框框向左移动
-        // 当前框变小
-        // 之后框变大
-        // 复原所有框
+        let script = this.level_design.getComponent("level_design");
+        script.next_level();
     }
 }
