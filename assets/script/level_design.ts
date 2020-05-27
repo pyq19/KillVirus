@@ -45,8 +45,8 @@ export default class LevelDesign extends cc.Component {
 
         for (let i = 0; i < this.nodes.length; i++) {
             let script = this.nodes[i].getComponent("level_item");
-            script.set_item_index(i);
-            script.set_item_level(this.current_level - 2 + i);
+            script.set_index(i);
+            script.set_level(this.current_level - 2 + i);
         }
     }
 
@@ -54,10 +54,19 @@ export default class LevelDesign extends cc.Component {
         if (this.current_level == 1) {
             return;
         }
+        this.current_level--;
+        if (this.current_level == 1) {
+            this.left0.active = false;
+            this.right0.active = false;
+        } else {
+            this.left0.active = true;
+            this.right0.active = true;
+        }
+
         let t = cc.tween;
         for (let i = 0; i < this.nodes.length; i++) {
             let script = this.nodes[i].getComponent("level_item");
-            switch (script.item_index) {
+            switch (script.index) {
                 case 0:
                     t(this.nodes[i])
                         .by(this.anim_speed, {
@@ -65,7 +74,7 @@ export default class LevelDesign extends cc.Component {
                             opacity: 255,
                         })
                         .call(() => {
-                            script.set_item_index(1);
+                            script.set_index(1);
                         })
                         .start();
                     break;
@@ -78,7 +87,7 @@ export default class LevelDesign extends cc.Component {
                             t().to(this.anim_speed, { scale: 1.6 })
                         )
                         .call(() => {
-                            script.set_item_index(2);
+                            script.set_index(2);
                         })
                         .start();
                     break;
@@ -91,7 +100,7 @@ export default class LevelDesign extends cc.Component {
                             t().to(this.anim_speed, { scale: 1 })
                         )
                         .call(() => {
-                            script.set_item_index(3);
+                            script.set_index(3);
                         })
                         .start();
                     break;
@@ -105,17 +114,19 @@ export default class LevelDesign extends cc.Component {
                         )
                         .call(() => {
                             this.nodes[i].setPosition(cc.v2(-400, 0));
-                            script.set_item_index(0);
-                            script.set_item_level(this.current_level - 2);
+                            script.set_index(0);
+                            script.set_level(this.current_level - 2);
+                            // t(this.nodes[i])
+                            //     .to(this.anim_speed, { opacity: 255 })
+                            //     .start();
                         })
                         .start();
                     break;
                 case 4:
-                    script.set_item_level(this.current_level + 1);
+                    script.set_level(this.current_level + 2);
                     break;
             }
         }
-        this.current_level--;
         t(this.left1)
             .by(this.anim_speed, {
                 position: cc.v2(240, 0),
