@@ -8,7 +8,7 @@ export default class LevelDesign extends cc.Component {
     separators: Array<cc.Node> = [];
 
     anim_speed = 0.2;
-    current_level = 0;
+    current_level = 6;
 
     left0: cc.Node = null;
     right0: cc.Node = null;
@@ -33,80 +33,89 @@ export default class LevelDesign extends cc.Component {
         this.nodes[2].scale = 1.6;
         this.left0.opacity = 0;
         this.right0.opacity = 0;
+        if (this.current_level == 1) {
+            this.left1.opacity = 0;
+        } else {
+            this.left1.opacity = 255;
+        }
         this.right1.opacity = 0;
         this.left2.opacity = 0;
         this.left3.opacity = 0;
         this.right3.opacity = 0;
 
-        this.set_current_level(5);
-    }
-
-    set_current_level(level: number) {
-        this.current_level = level;
         for (let i = 0; i < this.nodes.length; i++) {
-            this.nodes[i]
-                .getComponent("level_item")
-                .set_item_level(level - 2 + i);
+            let script = this.nodes[i].getComponent("level_item");
+            script.set_item_index(i);
+            script.set_item_level(this.current_level - 2 + i);
         }
     }
 
-    // 关卡-1(向右滑动)
     previous_level() {
-        cc.log(this.current_level);
-        if (this.current_level <= 1) {
+        if (this.current_level == 1) {
             return;
         }
         let t = cc.tween;
-        t(this.nodes[0])
-            .by(this.anim_speed, { position: cc.v2(200, 0), opacity: 255 })
-            .call(() => {
-                t(this.nodes[0])
-                    .parallel(
-                        t().by(0, { position: cc.v2(-200, 0) }),
-                        t().to(0, { opacity: 0 })
-                    )
-                    .start();
-                // FIXME 动画实现得有问题
-                // 换种思路：把 node 做成预制体?
-                this.set_current_level(this.current_level - 1);
-            })
-            .start();
-        t(this.nodes[1])
-            .parallel(
-                t().by(this.anim_speed, { position: cc.v2(200, 0) }),
-                t().to(this.anim_speed, { scale: 1.6 })
-            )
-            .call(() => {
-                t(this.nodes[1])
-                    .by(0, { position: cc.v2(-200, 0) })
-                    .to(0, { scale: 1 })
-                    .start();
-            })
-            .start();
-        t(this.nodes[2])
-            .parallel(
-                t().by(this.anim_speed, { position: cc.v2(200, 0) }),
-                t().to(this.anim_speed, { scale: 1 })
-            )
-            .call(() => {
-                t(this.nodes[2])
-                    .by(0, { position: cc.v2(-200, 0) })
-                    .to(0, { scale: 1.6 })
-                    .start();
-            })
-            .start();
-        t(this.nodes[3])
-            .parallel(
-                t().by(this.anim_speed, { position: cc.v2(200, 0) }),
-                t().to(this.anim_speed, { opacity: 0 })
-            )
-            .call(() => {
-                t(this.nodes[3])
-                    .by(0, { position: cc.v2(-200, 0) })
-                    .to(0, { opacity: 255 })
-                    .start();
-            })
-            .start();
+        for (let i = 0; i < this.nodes.length; i++) {
+            let script = this.nodes[i].getComponent("level_item");
+            switch (script.item_index) {
+                case 0:
+                    t(this.nodes[i])
+                        .by(this.anim_speed, {
+                            position: cc.v2(200, 0),
+                            opacity: 255,
+                        })
+                        .call(() => {
+                            script.set_item_index(1);
+                        })
+                        .start();
+                    break;
+                case 1:
+                    t(this.nodes[i])
+                        .parallel(
+                            t().by(this.anim_speed, {
+                                position: cc.v2(200, 0),
+                            }),
+                            t().to(this.anim_speed, { scale: 1.6 })
+                        )
+                        .call(() => {
+                            script.set_item_index(2);
+                        })
+                        .start();
+                    break;
+                case 2:
+                    t(this.nodes[i])
+                        .parallel(
+                            t().by(this.anim_speed, {
+                                position: cc.v2(200, 0),
+                            }),
+                            t().to(this.anim_speed, { scale: 1 })
+                        )
+                        .call(() => {
+                            script.set_item_index(3);
+                        })
+                        .start();
+                    break;
+                case 3:
+                    t(this.nodes[i])
+                        .parallel(
+                            t().by(this.anim_speed, {
+                                position: cc.v2(200, 0),
+                            }),
+                            t().to(this.anim_speed, { opacity: 0 })
+                        )
+                        .call(() => {
+                            this.nodes[i].setPosition(cc.v2(-400, 0));
+                            script.set_item_index(0);
+                            script.set_item_level(this.current_level - 2);
+                        })
+                        .start();
+                    break;
+                case 4:
+                    script.set_item_level(this.current_level + 1);
+                    break;
+            }
+        }
+        this.current_level--;
         t(this.left1)
             .by(this.anim_speed, {
                 position: cc.v2(240, 0),
@@ -116,6 +125,9 @@ export default class LevelDesign extends cc.Component {
                 t(this.left1)
                     .by(0, { position: cc.v2(-240, 0), opacity: 255 })
                     .start();
+                if (this.current_level == 1) {
+                    t(this.left1).to(0, { opacity: 0 }).start();
+                }
             })
             .start();
         t(this.right1)
@@ -134,6 +146,17 @@ export default class LevelDesign extends cc.Component {
             .call(() => {
                 t(this.left0)
                     .by(0, { position: cc.v2(-160, 0), opacity: -255 })
+                    .start();
+            })
+            .start();
+        t(this.right2)
+            .by(this.anim_speed, {
+                position: cc.v2(240, 0),
+                opacity: -255,
+            })
+            .call(() => {
+                t(this.right2)
+                    .by(0, { position: cc.v2(-240, 0), opacity: 255 })
                     .start();
             })
             .start();
