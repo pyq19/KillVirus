@@ -12,6 +12,8 @@ export default class Game extends cc.Component {
     setting: cc.Node = null;
     @property(cc.Node)
     get_gold: cc.Node = null;
+    @property(cc.Node)
+    bottom: cc.Node = null;
 
     // 移出
     move_out() {
@@ -19,7 +21,7 @@ export default class Game extends cc.Component {
             .to(0.3, { position: cc.v2(0, 1000) })
             .start();
         cc.tween(this.logo)
-            .to(0.3, { position: cc.v2(0, 1000) })
+            .by(0.3, { position: cc.v2(0, 1000) })
             .start();
         cc.tween(this.setting)
             .by(0.3, { position: cc.v2(-200, 0) })
@@ -30,6 +32,9 @@ export default class Game extends cc.Component {
         cc.tween(this.get_gold)
             .by(0.3, { position: cc.v2(1000, 0) })
             .start();
+        cc.tween(this.bottom)
+            .by(0.3, { position: cc.v2(0, -200) })
+            .start();
     }
 
     // 移入
@@ -38,7 +43,7 @@ export default class Game extends cc.Component {
             .to(0.3, { position: cc.v2(0, 0) })
             .start();
         cc.tween(this.logo)
-            .to(0.3, { position: cc.v2(0, 0) })
+            .by(0.3, { position: cc.v2(0, -1000) })
             .start();
         cc.tween(this.setting)
             .by(0.3, { position: cc.v2(200, 0) })
@@ -48,6 +53,9 @@ export default class Game extends cc.Component {
             .start();
         cc.tween(this.get_gold)
             .by(0.3, { position: cc.v2(-1000, 0) })
+            .start();
+        cc.tween(this.bottom)
+            .by(0.3, { position: cc.v2(0, 200) })
             .start();
     }
 
