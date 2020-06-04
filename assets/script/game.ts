@@ -14,6 +14,8 @@ export default class Game extends cc.Component {
     get_gold: cc.Node = null;
     @property(cc.Node)
     bottom: cc.Node = null;
+    @property(cc.Node)
+    tip: cc.Node = null;
 
     // 移出
     move_out() {
@@ -35,6 +37,7 @@ export default class Game extends cc.Component {
         cc.tween(this.bottom)
             .by(0.3, { position: cc.v2(0, -200) })
             .start();
+        cc.tween(this.tip).to(0.3, { opacity: 0 }).start();
     }
 
     // 移入
@@ -57,6 +60,7 @@ export default class Game extends cc.Component {
         cc.tween(this.bottom)
             .by(0.3, { position: cc.v2(0, 200) })
             .start();
+        cc.tween(this.tip).to(0.3, { opacity: 255 }).start();
     }
 
     // 关卡-1(向右滑动)
