@@ -16,6 +16,28 @@ export default class Game extends cc.Component {
     bottom: cc.Node = null;
     @property(cc.Node)
     tip: cc.Node = null;
+    @property(cc.Node)
+    bg: cc.Node = null;
+    @property(cc.Node)
+    airplane: cc.Node = null;
+
+    onLoad() {
+        // this.airplane.setPosition(cc.v2(0, -925));
+        // this.airplane.setScale(cc.v2(0.8, 0.8));
+        // this.airplane.runAction(
+        //     cc.sequence(cc.moveTo(1, cc.v2(0, -385)), cc.scaleTo(0.5, 1, 1))
+        // );
+        this.airplane.setPosition(cc.v2(0, -925));
+        this.airplane.setScale(cc.v2(0.8, 0.8));
+        let t = cc.tween;
+        t(this.airplane)
+            .to(1, { position: cc.v2(0, -508) })
+            .call(() => {
+                t(this.airplane).to(0.5, { scale: 1 }).start();
+                t(this.bg).to(0.5, { scale: 1.2 }).start();
+            })
+            .start();
+    }
 
     // 移出
     move_out() {
@@ -38,6 +60,7 @@ export default class Game extends cc.Component {
             .by(0.3, { position: cc.v2(0, -200) })
             .start();
         cc.tween(this.tip).to(0.3, { opacity: 0 }).start();
+        cc.tween(this.bg).to(0.5, { scale: 1 }).start();
     }
 
     // 移入
@@ -61,6 +84,7 @@ export default class Game extends cc.Component {
             .by(0.3, { position: cc.v2(0, 200) })
             .start();
         cc.tween(this.tip).to(0.3, { opacity: 255 }).start();
+        cc.tween(this.bg).to(0.5, { scale: 1.2 }).start();
     }
 
     // 关卡-1(向右滑动)
