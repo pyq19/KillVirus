@@ -39,8 +39,9 @@ export default class Game extends cc.Component {
                 t(this.bg).to(0.5, { scale: 1.2 }).start();
             })
             .start();
-        let gold = cc.instantiate(this.gold_prefab);
-        this.node.addChild(gold);
+        // let gold = cc.instantiate(this.gold_prefab);
+        // this.node.addChild(gold);
+        window["generate_gold"] = this.generate_gold;
     }
 
     // 移出
@@ -101,5 +102,10 @@ export default class Game extends cc.Component {
     next_level() {
         let script = this.level_design.getComponent("level_design");
         script.next_level();
+    }
+
+    // 创建金币
+    generate_gold() {
+        cc.log("generate_gold from game.ts");
     }
 }
