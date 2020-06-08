@@ -20,6 +20,8 @@ export default class Game extends cc.Component {
     bg: cc.Node = null;
     @property(cc.Node)
     airplane: cc.Node = null;
+    @property(cc.Prefab)
+    gold_prefab: cc.Prefab = null;
 
     onLoad() {
         // this.airplane.setPosition(cc.v2(0, -925));
@@ -37,6 +39,8 @@ export default class Game extends cc.Component {
                 t(this.bg).to(0.5, { scale: 1.2 }).start();
             })
             .start();
+        let gold = cc.instantiate(this.gold_prefab);
+        this.node.addChild(gold);
     }
 
     // 移出
