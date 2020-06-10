@@ -4,7 +4,7 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class Award extends cc.Component {
     on_get_gold_click() {
-        window["generate_gold"]();
+        window["create_golds"](this.node.getPosition());
     }
 
     update(dt: number) {
