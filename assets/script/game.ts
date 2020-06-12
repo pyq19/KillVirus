@@ -125,25 +125,50 @@ export default class Game extends cc.Component {
         return gold;
     }
 
-    // TODO 传入中心点、半径、数量，返回以该点为圆心的点的数组
+    _random(lower: number, upper: number) {
+        return Math.floor(Math.random() * (upper - lower)) + lower;
+    }
+
+    // 传入中心点、半径、数量，返回以该点为圆心的点的数组
     _get_points(
         center: cc.Vec2,
         radius: number,
         count: number
     ): Array<cc.Vec2> {
-        return [cc.v2(-100, -200), cc.v2(-200, -300)];
+        let points = [];
+        let ox = center.x;
+        let oy = center.y;
+        let r = radius;
+        var radians = (Math.PI / 180) * Math.round(360 / count); //弧度
+        for (let i = 0; i < count; i++) {
+            var x = ox + r * Math.sin(radians * i) + this._random(-30, 30);
+            let y = oy + r * Math.cos(radians * i) + this._random(-30, 30);
+            // points.unshift({ x: x, y: y }); //为保持数据顺时针
+            points.push(cc.v2(x, y));
+        }
+        return points;
     }
 
     // 创建很多的金币, center 是起始点
     create_golds(center: cc.Vec2) {
-        let points = this._get_points(center, 10, 8);
+        let points = this._get_points(center, 160, 15);
+        // 对 points 排序，离目标点 (-468, 885) 近的排前面
+        points.sort(function (a: cc.Vec2, b: cc.Vec2) {
+            let d = cc.v2(-468, 885);
+            let ax = a.x - d.x;
+            let ay = a.y - d.y;
+            let ad = Math.sqrt(ax * ax + ay * ay);
+            let bx = b.x - d.x;
+            let by = b.y - d.y;
+            let bd = Math.sqrt(bx * bx + by * by);
+            return ad - bd;
+        });
         let golds = [];
         for (let i = 0; i < points.length; i++) {
             golds.push(this._create_gold(this.node));
         }
-        // 对 points 排序，离目标点 (-468, 885) 近的排前面
-        points.sort();
-        // 金币飞向目标点
+        //
+        // 金币飞向目标点, 从离目标点最近的开始飞
         let t = cc.tween;
         let isScale = false; // top 的金币是否放大
         let top_gold = this.top.getChildByName("Gold");
@@ -152,9 +177,10 @@ export default class Game extends cc.Component {
             gold.setPosition(this.get_gold.getPosition());
             t(gold)
                 .to(0.2, { position: points[i] })
+                .delay(0.03 * i)
                 .call(() => {
                     t(gold)
-                        .to(0.5, { position: cc.v2(-468, 885) })
+                        .to(0.25, { position: cc.v2(-468, 885) })
                         .call(() => {
                             if (!isScale) {
                                 t(top_gold)
