@@ -208,6 +208,7 @@ export default class Game extends cc.Component {
         let award = this.get_gold.getComponent("award");
         award.set_award_gold(0);
         this.top.getChildByName("LabGold").getComponent(cc.Label).string = "0";
+        this.set_top_gold(0);
     }
 
     // 获取 top 金币
