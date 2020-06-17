@@ -9,6 +9,12 @@ export default class Award extends cc.Component {
 
     on_get_gold_click() {
         window["create_golds"](this.node.getPosition());
+        let game = this.node.getParent().getComponent("game");
+        let award_gold: number = this.get_award_gold();
+        this.set_award_gold(0);
+        let top_gold: number = game.get_top_gold();
+        // cc.log(award_gold, " ", top_gold, " ", award_gold + top_gold);
+        game.set_top_gold(top_gold + award_gold);
     }
 
     onLoad() {
@@ -19,11 +25,7 @@ export default class Award extends cc.Component {
         this.gold = this.node.getChildByName("LabCoin").getComponent(cc.Label);
         this.gold.string = "0";
 
-        let award_gold = cc.sys.localStorage.getItem("award_gold");
-        if (award_gold == null) {
-            award_gold = 0;
-        }
-        this.gold.string = award_gold + "";
+        this.gold.string = this.get_award_gold() + "";
         cc.sys.localStorage.setItem("award_gold", parseInt(this.gold.string));
     }
 
@@ -44,5 +46,19 @@ export default class Award extends cc.Component {
             );
         }
         // cc.log(cc.sys.localStorage.getItem("award_gold"));
+    }
+
+    // 设置奖励的金币数量
+    set_award_gold(num: number) {
+        cc.sys.localStorage.setItem("award_gold", 0);
+        this.node.getChildByName("LabCoin").getComponent(cc.Label).string = "0";
+    }
+
+    get_award_gold(): number {
+        let award_gold = cc.sys.localStorage.getItem("award_gold");
+        if (award_gold == null) {
+            award_gold = 0;
+        }
+        return parseInt(award_gold);
     }
 }

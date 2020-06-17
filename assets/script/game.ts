@@ -205,10 +205,25 @@ export default class Game extends cc.Component {
 
     // 重置数据 比如金币
     reset_data() {
-        cc.sys.localStorage.setItem("award_gold", 0);
-        this.node
-            .getChildByName("Award")
-            .getChildByName("LabCoin")
-            .getComponent(cc.Label).string = "0";
+        let award = this.get_gold.getComponent("award");
+        award.set_award_gold(0);
+        this.top.getChildByName("LabGold").getComponent(cc.Label).string = "0";
+    }
+
+    // 获取 top 金币
+    get_top_gold(): number {
+        let top_gold = cc.sys.localStorage.getItem("top_gold");
+        if (top_gold == null) {
+            top_gold = 0;
+        }
+        return parseInt(top_gold);
+    }
+
+    // 设置top金币
+    set_top_gold(num: number) {
+        // cc.log("set top gold ", num);
+        cc.sys.localStorage.setItem("top_gold", num);
+        this.top.getChildByName("LabGold").getComponent(cc.Label).string =
+            num + "";
     }
 }
