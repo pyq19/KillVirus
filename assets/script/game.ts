@@ -202,4 +202,13 @@ export default class Game extends cc.Component {
                 .start();
         }
     }
+
+    // 重置数据 比如金币
+    reset_data() {
+        cc.sys.localStorage.setItem("award_gold", 0);
+        this.node
+            .getChildByName("Award")
+            .getChildByName("LabCoin")
+            .getComponent(cc.Label).string = "0";
+    }
 }
