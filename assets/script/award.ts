@@ -8,9 +8,12 @@ export default class Award extends cc.Component {
     time: number = 3; // 3 秒一圈
 
     on_get_gold_click() {
+        let award_gold: number = this.get_award_gold();
+        if (award_gold === 0 || award_gold == null) {
+            return;
+        }
         window["create_golds"](this.node.getPosition());
         let game = this.node.getParent().getComponent("game");
-        let award_gold: number = this.get_award_gold();
         this.set_award_gold(0);
         let top_gold: number = game.get_top_gold();
         // cc.log(award_gold, " ", top_gold, " ", award_gold + top_gold);
