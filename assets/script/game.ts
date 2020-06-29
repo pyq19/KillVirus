@@ -74,6 +74,7 @@ export default class Game extends cc.Component {
             .start();
         cc.tween(this.tip).to(0.3, { opacity: 0 }).start();
         cc.tween(this.bg).to(0.5, { scale: 1 }).start();
+        cc.tween(this.airplane).to(0.5, { scale: 0.8 }).start();
     }
 
     // 移入
@@ -98,6 +99,7 @@ export default class Game extends cc.Component {
             .start();
         cc.tween(this.tip).to(0.3, { opacity: 255 }).start();
         cc.tween(this.bg).to(0.5, { scale: 1.2 }).start();
+        cc.tween(this.airplane).to(0.5, { scale: 1 }).start();
     }
 
     // 关卡-1(向右滑动)
@@ -226,5 +228,13 @@ export default class Game extends cc.Component {
         cc.sys.localStorage.setItem("top_gold", num);
         this.top.getChildByName("LabGold").getComponent(cc.Label).string =
             num + "";
+    }
+
+    // 移动飞机
+    update_airplane_position(delta: cc.Vec2) {
+        let current_position = this.airplane.getPosition();
+        this.airplane.setPosition(
+            cc.v2(current_position.x + delta.x, current_position.y + delta.y)
+        );
     }
 }
