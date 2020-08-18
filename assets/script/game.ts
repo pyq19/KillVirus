@@ -24,6 +24,10 @@ export default class Game extends cc.Component {
     airplane: cc.Node = null;
     @property(cc.Prefab)
     gold_prefab: cc.Prefab = null;
+    // @property(cc.Prefab)
+    // bullet_prefab: cc.Prefab = null;
+
+    private airplane_gun: cc.Node = null;
 
     onLoad() {
         // this.airplane.setPosition(cc.v2(0, -925));
@@ -50,6 +54,13 @@ export default class Game extends cc.Component {
             this.gold_pool.put(gold);
         }
         window["create_golds"] = this.create_golds.bind(this);
+
+        // 飞机武器隐藏
+        this.airplane_gun = this.airplane.getChildByName("Gun");
+        cc.tween(this.airplane_gun)
+            .repeatForever(cc.sequence(cc.scaleTo(0.1, 1), cc.scaleTo(0.1, 0)))
+            .start();
+        this.airplane_gun.active = false;
     }
 
     // 移出
@@ -236,5 +247,19 @@ export default class Game extends cc.Component {
         this.airplane.setPosition(
             cc.v2(current_position.x + delta.x, current_position.y + delta.y)
         );
+    }
+
+    // 飞机发射子弹
+    airplane_start_fire() {
+        // cc.log("airplane_start_fire");
+        if (this.airplane_gun.active === false) {
+            this.airplane_gun.active = true;
+        }
+    }
+
+    // 飞机停止发射子弹
+    airplane_stop_fire() {
+        // cc.log("airplane_stop_fire");
+        this.airplane_gun.active = false;
     }
 }
