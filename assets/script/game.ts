@@ -2,7 +2,9 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class Game extends cc.Component {
+    airplane_gun: cc.Node = null;
     gold_pool: cc.NodePool = null;
+    bullet_pool: cc.NodePool = null;
 
     @property(cc.Node)
     top: cc.Node = null;
@@ -24,10 +26,8 @@ export default class Game extends cc.Component {
     airplane: cc.Node = null;
     @property(cc.Prefab)
     gold_prefab: cc.Prefab = null;
-    // @property(cc.Prefab)
-    // bullet_prefab: cc.Prefab = null;
-
-    private airplane_gun: cc.Node = null;
+    @property(cc.Prefab)
+    bullet_prefab: cc.Prefab = null;
 
     onLoad() {
         // this.airplane.setPosition(cc.v2(0, -925));
@@ -48,12 +48,20 @@ export default class Game extends cc.Component {
 
         // 金币对象池
         this.gold_pool = new cc.NodePool();
-        let init_count = 10;
-        for (let i = 0; i < init_count; i++) {
+        let gold_object_count = 10;
+        for (let i = 0; i < gold_object_count; i++) {
             let gold = cc.instantiate(this.gold_prefab);
             this.gold_pool.put(gold);
         }
         window["create_golds"] = this.create_golds.bind(this);
+
+        // 子弹对象池
+        this.bullet_pool = new cc.NodePool();
+        let bullet_object_count = 10;
+        for (let i = 0; i < bullet_object_count; i++) {
+            let bullet = cc.instantiate(this.bullet_prefab);
+            this.bullet_pool.put(bullet);
+        }
 
         // 飞机武器隐藏
         this.airplane_gun = this.airplane.getChildByName("Gun");
@@ -251,15 +259,38 @@ export default class Game extends cc.Component {
 
     // 飞机发射子弹
     airplane_start_fire() {
-        // cc.log("airplane_start_fire");
+        cc.log("airplane_start_fire");
         if (this.airplane_gun.active === false) {
             this.airplane_gun.active = true;
         }
+        this.schedule(this.create_bullet, 0.1);
     }
 
     // 飞机停止发射子弹
     airplane_stop_fire() {
-        // cc.log("airplane_stop_fire");
+        cc.log("airplane_stop_fire");
         this.airplane_gun.active = false;
+        this.unschedule(this.create_bullet);
+    }
+
+    // 创建一个子弹
+    create_bullet(): cc.Node {
+        // cc.log("create bullet");
+        let bullet: cc.Node = null;
+        if (this.bullet_pool.size() > 0) {
+            bullet = this.bullet_pool.get();
+        } else {
+            bullet = cc.instantiate(this.bullet_prefab);
+        }
+        bullet.parent = this.node;
+        bullet.x = this.airplane.position.x;
+        bullet.y = this.airplane.position.y + 150;
+        return bullet;
+    }
+
+    // 把一个子弹node放入对象池
+    delete_bullet(bullet: cc.Node) {
+        // cc.log("delete bullet");
+        this.bullet_pool.put(bullet);
     }
 }

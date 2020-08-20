@@ -31,8 +31,10 @@ export default class Touch extends cc.Component {
     }
 
     on_touch_start() {
+        // cc.log("on touch start");
         cc.tween(this.bg).to(0.5, { opacity: 0 }).start(); // 点击时候 bg 淡出
         if (this.is_playing) {
+            this.game.airplane_start_fire();
             return;
         }
         this.is_playing = true;
@@ -40,7 +42,7 @@ export default class Touch extends cc.Component {
         this.scheduleOnce(() => {
             this.is_movable = true;
             this.game.airplane_start_fire();
-        }, 0.5); // 0.5秒后 只执行一次
+        }, 0.1); // 0.5秒后 只执行一次
     }
 
     on_touch_move(event: cc.Event.EventTouch, target: cc.Node) {
@@ -49,7 +51,6 @@ export default class Touch extends cc.Component {
         }
         // cc.log("on_touch_move");
         this.game.update_airplane_position(event.getDelta());
-        this.game.airplane_start_fire();
     }
 
     on_touch_end() {
