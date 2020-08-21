@@ -29,6 +29,8 @@ export default class Game extends cc.Component {
     @property(cc.Prefab)
     bullet_prefab: cc.Prefab = null;
 
+    private bullet_count: number = 1;
+
     onLoad() {
         // this.airplane.setPosition(cc.v2(0, -925));
         // this.airplane.setScale(cc.v2(0.8, 0.8));
@@ -274,18 +276,42 @@ export default class Game extends cc.Component {
     }
 
     // 创建一个子弹
-    create_bullet(): cc.Node {
-        // cc.log("create bullet");
-        let bullet: cc.Node = null;
-        if (this.bullet_pool.size() > 0) {
-            bullet = this.bullet_pool.get();
-        } else {
-            bullet = cc.instantiate(this.bullet_prefab);
+    create_bullet() {
+        let count = this.bullet_count;
+        cc.log("create_bullet count:", count);
+        let offsetX = 0;
+        for (let i = 0; i < count; i++) {
+            if (count === 1) {
+                offsetX = 0;
+            } else {
+                if (count % 2 === 0) {
+                    // 偶数个子弹
+                    if (i % 2 === 0) {
+                        offsetX = (i + 1) * 15;
+                    } else {
+                        offsetX = -i * 15;
+                    }
+                } else {
+                    // 奇数个子弹
+                    if (i === 0) {
+                        offsetX = 0;
+                    } else if (i % 2 === 0) {
+                        offsetX = i * 15;
+                    } else {
+                        offsetX = (-i - 1) * 15;
+                    }
+                }
+            }
+            let bullet: cc.Node = null;
+            if (this.bullet_pool.size() > 0) {
+                bullet = this.bullet_pool.get();
+            } else {
+                bullet = cc.instantiate(this.bullet_prefab);
+            }
+            bullet.parent = this.node;
+            bullet.y = this.airplane.position.y + 150;
+            bullet.x = this.airplane.position.x + offsetX;
         }
-        bullet.parent = this.node;
-        bullet.x = this.airplane.position.x;
-        bullet.y = this.airplane.position.y + 150;
-        return bullet;
     }
 
     // 把一个子弹node放入对象池
